@@ -44,7 +44,7 @@
                               <Label text="Price/Cost" GridPane.rowIndex="3" />
                               <Label text="Max" GridPane.rowIndex="4" />
                               <Label text="Min" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                              <TextField fx:id="productIDField" editable="false" promptText="Auto Gen - Disabled" GridPane.columnIndex="1">
+                              <TextField fx:id="productIDField" disable="true" editable="false" promptText="Auto Gen - Disabled" GridPane.columnIndex="1">
                                   <font>
                                       <Font name="System Italic" size="12.0" />
                                   </font>
@@ -60,27 +60,28 @@
               </VBox>
             <VBox prefHeight="600.0" prefWidth="512.0" spacing="10.0">
                <children>
-                  <HBox alignment="CENTER_RIGHT">
+                  <HBox alignment="CENTER_RIGHT" spacing="55.0">
                      <children>
-                        <TextField fx:id="searchAssociatedPartsField" maxWidth="-Infinity" prefWidth="200.0" promptText="Search by Part ID or Name" />
+                        <Label fx:id="partSearchResults" maxWidth="84.0" minWidth="84.0" prefWidth="84.0" textFill="RED" />
+                        <TextField fx:id="searchAvailablePartsField" maxWidth="-Infinity" onKeyTyped="#searchParts" prefWidth="200.0" promptText="Search by Part ID or Name" />
                      </children>
                   </HBox>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="availablePartsTable" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn fx:id="unassociatedPartIdCol" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" resizable="false" text="Part ID" />
-                      <TableColumn fx:id="unassociatedPartNameCol" maxWidth="145.0" minWidth="145.0" prefWidth="145.0" resizable="false" text="Part Name" />
-                        <TableColumn fx:id="unassociatedPartStockCol" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" text="Inventory Level" />
-                        <TableColumn fx:id="unassociatedPartCostCol" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" text="Price/Cost per Unit" />
+                      <TableColumn fx:id="availablePartIdCol" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" resizable="false" text="Part ID" />
+                      <TableColumn fx:id="availablePartNameCol" maxWidth="145.0" minWidth="145.0" prefWidth="145.0" resizable="false" text="Part Name" />
+                        <TableColumn fx:id="availablePartStockCol" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" text="Inventory Level" />
+                        <TableColumn fx:id="availablePartCostCol" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" resizable="false" text="Price/Cost per Unit" />
                     </columns>
                   </TableView>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <Button fx:id="addAssociatedPartsButton" mnemonicParsing="false" text="Add" />
+                        <Button fx:id="addAssociatedPartsButton" mnemonicParsing="false" onAction="#associatePart" text="Add" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding></HBox>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="associatedPartsTable" prefHeight="200.0" prefWidth="200.0">
                     <columns>
                       <TableColumn fx:id="associatedPartIdCol" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" resizable="false" text="Part ID" />
                       <TableColumn fx:id="associatedPartNameCol" maxWidth="145.0" minWidth="145.0" prefWidth="145.0" resizable="false" text="Part Name" />
@@ -90,15 +91,15 @@
                   </TableView>
                   <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <Button fx:id="removeAssociatedPartsButton" mnemonicParsing="false" text="Remove Associated Part" />
+                        <Button fx:id="removeAssociatedPartsButton" mnemonicParsing="false" onAction="#removeAssociatedPart" text="Remove Associated Part" />
                      </children>
                      <padding>
                         <Insets right="30.0" />
                      </padding></HBox>
                   <HBox alignment="CENTER_RIGHT" spacing="50.0">
                      <children>
-                        <Button fx:id="saveAddProductButton" mnemonicParsing="false" text="Save" />
-                        <Button fx:id="cancelAddProductButton" mnemonicParsing="false" onAction="#cancelAddProduct" text="Cancel" />
+                        <Button fx:id="saveAddProductButton" mnemonicParsing="false" onAction="#saveNewProduct" text="Save" />
+                        <Button fx:id="cancelAddProductButton" mnemonicParsing="false" onAction="#backToInventoryManager" text="Cancel" />
                      </children>
                      <padding>
                         <Insets right="30.0" />

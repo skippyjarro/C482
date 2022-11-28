@@ -24,14 +24,15 @@
                <children>
                   <VBox style="-fx-border-color: black; -fx-border-radius: 10px; -fx-padding: 10;">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefWidth="468.0" spacing="200.0">
+                        <HBox alignment="CENTER_LEFT" prefWidth="468.0" spacing="55.0">
                            <children>
                               <Label text="Parts">
                                  <padding>
                                     <Insets left="10.0" />
                                  </padding>
                               </Label>
-                              <TextField fx:id="searchPartsField" onAction="#searchParts" prefWidth="200.0" promptText="Search by Part ID or Name">
+                              <Label fx:id="partSearchResults" maxWidth="84.0" minWidth="84.0" prefWidth="84.0" textFill="RED" />
+                              <TextField fx:id="searchPartsField" onKeyTyped="#searchParts" prefWidth="200.0" promptText="Search by Part ID or Name">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
                                  </HBox.margin></TextField>
@@ -49,7 +50,7 @@
                            <children>
                               <Button fx:id="addPart" mnemonicParsing="false" onAction="#toAddPart" text="Add" />
                               <Button fx:id="modifyPart" mnemonicParsing="false" onAction="#toModifyPart" text="Modify" />
-                              <Button fx:id="deletePart" mnemonicParsing="false" onAction="#deletePart" text="Delete" />
+                              <Button fx:id="deletePartButton" mnemonicParsing="false" onAction="#deletePart" text="Delete" />
                            </children>
                            <VBox.margin>
                               <Insets top="10.0" />
@@ -59,13 +60,14 @@
                   </VBox>
                   <VBox style="-fx-border-color: black; -fx-border-radius: 10px; -fx-padding: 10px;">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefWidth="468.0" spacing="180.0">
+                        <HBox alignment="CENTER_LEFT" prefWidth="468.0" spacing="45.0">
                            <children>
                               <Label text="Products">
                                  <padding>
                                     <Insets left="10.0" />
                                  </padding>
                               </Label>
+                              <Label fx:id="productSearchResults" maxWidth="84.0" minWidth="84.0" prefWidth="84.0" textFill="RED" />
                               <TextField fx:id="searchProductsField" onKeyTyped="#searchProducts" prefWidth="200.0" promptText="Search by Part ID or Name">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
@@ -87,7 +89,7 @@
                            <children>
                               <Button fx:id="addProduct" mnemonicParsing="false" onAction="#toAddProduct" text="Add" />
                               <Button fx:id="modifyProduct" mnemonicParsing="false" onAction="#toModifyProduct" text="Modify" />
-                              <Button fx:id="deleteProduct" mnemonicParsing="false" onAction="#deleteProduct" text="Delete" />
+                              <Button fx:id="deleteProductButton" mnemonicParsing="false" onAction="#deleteProduct" text="Delete" />
                            </children>
                            <VBox.margin>
                               <Insets top="10.0" />
@@ -99,7 +101,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT">
                <children>
-                  <Button fx:id="exit" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Exit" textAlignment="CENTER">
+                  <Button fx:id="exitButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exitProgram" text="Exit" textAlignment="CENTER">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Button>
