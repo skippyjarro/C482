@@ -301,18 +301,30 @@ public class InventoryManagerController implements Initializable {
         ObservableList<Part> parts = FXCollections.observableArrayList();
         String searchText = searchPartsField.getText();
         int searchID;
-        try {
-            searchID = Integer.parseInt(searchText);
-            parts.add(Inventory.lookupPart(searchID));
-        } catch (Exception e) {
-            parts = Inventory.lookupPart(searchText);
+        if (searchText.length() > 0) {
+            try {
+                searchID = Integer.parseInt(searchText);
+                parts.add(Inventory.lookupPart(searchID));
+            } catch (Exception e) {
+                parts = Inventory.lookupPart(searchText);
+            }
         }
-        if (parts.size() > 1 || parts.size() < 1) {
+        System.out.println(parts);
+        System.out.println(searchText.length());
+        if (searchText.length() != 0 && (parts.size() > 1 || parts.size() < 1)) {
             partSearchResults.setText(parts.size() + " Results Found");
-        } else if (parts.size() == 1) {
+        } else if (!parts.contains(null) && parts.size() == 1) {
             partSearchResults.setText(parts.size() + " Result Found");
+        } else if (parts.contains(null)){
+            partSearchResults.setText("No Results Found");
         }
-        partsTable.setItems(parts);
+        if (searchText.length() > 0) {
+            partsTable.setItems(parts);
+        } else if (searchText.length() < 1) {
+            parts.removeAll();
+            partsTable.setItems(Inventory.getAllParts());
+            partSearchResults.setText("");
+        }
     }
 
     /**
